@@ -1,0 +1,13 @@
+/* sample style */
+.inventory-app {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.product-item {
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 5px 0;
+    display: flex;
+    justify-content: space-between;
+}

@@ -1,0 +1,28 @@
+{
+  "name": "sari-sari-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main/index.js",
+  "scripts": {
+    "dev": "electron . --enable-logging",
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/trbyte/sari-sari-store-inventory.git"
+  },
+  "author": [ 
+    "Lavieen Alvarez",
+    "Eian Aguilar",
+    "Kyle Cabalan"
+  ],
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/trbyte/sari-sari-store-inventory/issues"
+  },
+  "homepage": "https://github.com/trbyte/sari-sari-store-inventory#readme",
+  "devDependencies": {
+    "electron": "^38.2.2"
+  }
+}
