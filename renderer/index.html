@@ -1,31 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-
-    <title>Tindahan sa IT</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tindahan sa IT</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
 </head>
 <body>
-    <!-- Add to index.html -->
-    <div class="inventory-app">
-        <!-- 1. Add Product Form -->
-        <form id="add-product-form">
-            <input type="text" id="product-name" placeholder="Product name" required>
-            <input type="number" id="product-price" placeholder="Price" required>
-            <input type="number" id="product-quantity" placeholder="Quantity" required>
-            <button type="submit">Add Product</button>
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <nav class="sidebar">
+      <h2>🛒 Tindahan<br><span>sa IT</span></h2>
+      <ul>
+        <li><a href="#" id="nav-home" class="active">🏠 Home</a></li>
+        <li><a href="#" id="nav-add">➕ Add Product</a></li>
+        <li><a href="#" id="nav-display">📋 Display Products</a></li>
+      </ul>
+    </nav>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      
+      <!-- Welcome Page -->
+      <section id="home-section" class="section active">
+        <h1>Welcome to <span>Tindahan sa IT</span>!</h1>
+        <p>Manage your sari-sari store products easily and efficiently.<br></p>
+        <img src="https://cdn-icons-png.flaticon.com/512/3081/3081559.png" alt="store" class="welcome-img">
+      </section>
+
+      <!-- Add Product Section -->
+      <section id="add-section" class="section hidden">
+        <h2>➕ Add New Product</h2>
+        <form id="add-product-form" class="product-form">
+          <input type="text" id="product-name" placeholder="Product name" required>
+          <input type="number" id="product-price" placeholder="Price (₱)" required>
+          <input type="number" id="product-quantity" placeholder="Quantity" required>
+          <button type="submit">Add Product</button>
         </form>
-        
-        <!-- 2. Product List Display -->
-        <div id="product-list">
+      </section>
+
+      <!-- Display Products Section -->
+      <section id="display-section" class="section hidden">
+        <h2>📋 Product Inventory</h2>
+        <table id="product-table">
+          <thead>
+            <tr>
+              <th>Product Name</th>
+              <th>Price (₱)</th>
+              <th>Quantity</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
             <!-- Products will appear here -->
-        </div>
-        
-        <!-- 3. Delete Buttons -->
-        <!-- Each product item should have a delete button -->
-    </div>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </div>
 </body>
 </html>
