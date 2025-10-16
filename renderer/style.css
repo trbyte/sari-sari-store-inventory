@@ -71,6 +71,21 @@ body {
   background-color: #133b57;
 }
 
+ul li a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+}
+
+.material-icons {
+  font-size: 20px;
+  vertical-align: middle;
+}
+
+
 /* Main Content */
 .main-content {
   flex: 1;
