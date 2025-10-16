@@ -10,6 +10,11 @@ pids
 *.seed
 *.pid.lock
 
+# Built Electron applications
+dist/
+dist-electron/
+win-unpacked/
+
 # Coverage directory used by tools like istanbul
 coverage/
 
