@@ -1,27 +1,17 @@
-// Core state and persistence
-const STORAGE_KEY = 'tindahan_products_v1';
-
-function readProducts() {
-  const raw = localStorage.getItem(STORAGE_KEY);
-  if (!raw) return [];
-  try {
-    const parsed = JSON.parse(raw);
-    if (Array.isArray(parsed)) return parsed;
-    return [];
-  } catch {
-    return [];
-  }
+// --- Database communication via preload.js bridge ---
+async function readProducts() {
+  return await window.api.list();
 }
 
-function writeProducts(products) {
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(products));
+async function addProduct(product) {
+  return await window.api.add(product);
 }
 
-function generateId() {
-  return `${Date.now()}-${Math.random().toString(36).slice(2, 9)}`;
+async function deleteProduct(id) {
+  return await window.api.remove(id);
 }
 
-// DOM references
+// --- DOM references ---
 const form = document.getElementById('add-product-form');
 const nameInput = document.getElementById('product-name');
 const priceInput = document.getElementById('product-price');
@@ -36,9 +26,9 @@ const homeSection = document.getElementById('home-section');
 const addSection = document.getElementById('add-section');
 const displaySection = document.getElementById('display-section');
 
-// Rendering
-function renderTable() {
-  const products = readProducts();
+// --- Rendering ---
+async function renderTable() {
+  const products = await readProducts();
   tableBody.innerHTML = '';
 
   if (!products.length) {
@@ -78,7 +68,7 @@ function renderTable() {
   });
 }
 
-// Navigation
+// --- Navigation ---
 function setActiveNav(activeLink) {
   [navHome, navAdd, navDisplay].forEach(link => {
     if (!link) return;
@@ -118,17 +108,17 @@ if (navAdd) {
 }
 
 if (navDisplay) {
-  navDisplay.addEventListener('click', (e) => {
+  navDisplay.addEventListener('click', async (e) => {
     e.preventDefault();
     setActiveNav(navDisplay);
     showSection(displaySection);
-    renderTable();
+    await renderTable();
   });
 }
 
-// Add product
+// --- Add product ---
 if (form) {
-  form.addEventListener('submit', (e) => {
+  form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const name = nameInput.value.trim();
@@ -148,32 +138,27 @@ if (form) {
       return;
     }
 
-    const products = readProducts();
-    const newProduct = { id: generateId(), name, price, quantity };
-    products.push(newProduct);
-    writeProducts(products);
+    await addProduct({ name, price, quantity });
 
     form.reset();
     nameInput.focus();
-    renderTable();
+    await renderTable();
     setActiveNav(navDisplay);
     showSection(displaySection);
   });
 }
 
-// Delete product (event delegation on table body)
+// --- Delete product ---
 if (tableBody) {
-  tableBody.addEventListener('click', (e) => {
+  tableBody.addEventListener('click', async (e) => {
     const target = e.target;
     if (target && target.classList.contains('delete-btn')) {
-      const id = target.getAttribute('data-id');
-      const products = readProducts();
-      const next = products.filter(p => String(p.id) !== String(id));
-      writeProducts(next);
-      renderTable();
+      const id = Number(target.getAttribute('data-id'));
+      await deleteProduct(id);
+      await renderTable();
     }
   });
 }
 
-// Initial boot
+// --- Initial boot ---
 renderTable();
